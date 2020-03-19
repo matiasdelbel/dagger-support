@@ -5,5 +5,12 @@ apply from: "$rootDir/plugin/module-kotlin-android.gradle"
 android.defaultConfig.applicationId = "com.delbel.dagger.testapp"
 
 dependencies {
-  implementation core.dagger
+    implementation project(':dagger-rx')
+
+    implementation core.dagger
+    kapt core.daggerCompiler
+
+    implementation rx.rxJava
+
+    implementation presentation.appcompat
 }

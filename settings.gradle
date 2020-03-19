@@ -1,3 +1,6 @@
-rootProject.name='dagger'
+rootProject.name = 'dagger'
 
 include ':app'
+
+/* Libraries */
+include ':dagger-rx'

@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+apply from: "$rootDir/plugin/module-kotlin-android.gradle"
+
+publish {
+    userOrg = 'matiasdelbel'
+    repoName = 'maven'
+
+    groupId = 'com.delbel.dagger'
+    artifactId = 'dagger-rx'
+    publishVersion = '0.0.3'
+
+    desc = 'Android library that integrate RxJava and Dagger'
+    website = 'https://github.com/matiasdelbel/dagger'
+}
+
+dependencies {
+    implementation core.dagger
+    kapt core.daggerCompiler
+
+    implementation rx.rxJava
+    implementation rx.rxAndroid
+}
