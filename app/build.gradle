@@ -1,0 +1,9 @@
+apply plugin: 'com.android.application'
+
+apply from: "$rootDir/plugin/module-kotlin-android.gradle"
+
+android.defaultConfig.applicationId = "com.delbel.dagger.testapp"
+
+dependencies {
+  implementation core.dagger
+}
