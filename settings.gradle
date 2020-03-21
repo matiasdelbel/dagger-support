@@ -4,3 +4,4 @@ include ':app'
 
 /* Libraries */
 include ':dagger-rx'
+include ':dagger-work'
