@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+apply from: "$rootDir/plugin/module-kotlin-android.gradle"
+
+publish {
+    userOrg = 'matiasdelbel'
+    repoName = 'maven'
+
+    groupId = 'com.delbel.dagger'
+    artifactId = 'dagger-work'
+    publishVersion = '0.0.2'
+
+    desc = 'Android library that integrate JetPack Worker and Dagger'
+    website = 'https://github.com/matiasdelbel/dagger'
+}
+
+dependencies {
+    implementation core.dagger
+    kapt core.daggerCompiler
+
+    implementation work.runtime
+}
