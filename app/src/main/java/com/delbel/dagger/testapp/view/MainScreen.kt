@@ -5,10 +5,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.WorkManager
 import com.delbel.dagger.rx.MainScheduler
 import com.delbel.dagger.testapp.MainApplication
 import com.delbel.dagger.testapp.R
 import com.delbel.dagger.testapp.repository.TextRepository
+import com.delbel.dagger.testapp.worker.NotificationWorker
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -42,6 +44,10 @@ class MainScreen : AppCompatActivity() {
             }
 
         disposables.add(disposable)
+    }
+
+    fun testWorkerDagger(view: View) {
+        WorkManager.getInstance(application).enqueue(NotificationWorker.workRequest())
     }
 
     override fun onDestroy() {

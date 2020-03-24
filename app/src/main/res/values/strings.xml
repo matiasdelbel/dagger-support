@@ -2,4 +2,9 @@
     <string name="app_name">Dagger Test App</string>
 
     <string name="app_calculate_length">Calculate length</string>
+
+    <string name="app_show_notification">Show notification from worker</string>
+    <string name="app_notify_channel_name">Dagger Test App notifications</string>
+    <string name="app_notify_title">Ey! A notification for you!</string>
+    <string name="app_notify_content">Send it from the test app.</string>
 </resources>
