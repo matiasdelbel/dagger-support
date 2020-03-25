@@ -2,56 +2,49 @@ package com.delbel.dagger.testapp.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
-import com.delbel.dagger.rx.MainScheduler
-import com.delbel.dagger.testapp.MainApplication
 import com.delbel.dagger.testapp.R
-import com.delbel.dagger.testapp.repository.TextRepository
 import com.delbel.dagger.testapp.worker.NotificationWorker
-import io.reactivex.Scheduler
-import io.reactivex.disposables.Disposable
+import com.delbel.dagger.viewmodel.ext.create
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class MainScreen : AppCompatActivity() {
+internal class MainScreen : AppCompatActivity() {
 
     @Inject
-    @MainScheduler
-    lateinit var mainScheduler: Scheduler
-    @Inject
-    lateinit var repository: TextRepository
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: MainViewModel
 
-    private val disposables = mutableListOf<Disposable>()
     private lateinit var input: EditText
+    private lateinit var calculateLength: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MainApplication).appComponent.inject(this)
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.screen_main)
         input = findViewById(R.id.input)
+        calculateLength = findViewById(R.id.calculateLength)
+
+        viewModel = viewModelFactory.create(this, MainViewModel::class.java)
+        viewModel.textLength.observe(this, Observer { text ->
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+            calculateLength.isEnabled = true
+        })
     }
 
     fun testRxDagger(view: View) {
-        view.isEnabled = false
-        val disposable = repository.obtainTextWithLength(input.text.toString())
-            .observeOn(mainScheduler)
-            .subscribe { text ->
-                Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-                view.isEnabled = true
-            }
-
-        disposables.add(disposable)
+        calculateLength.isEnabled = false
+        viewModel.onInputChanges(input.text.toString())
     }
 
     fun testWorkerDagger(view: View) {
         WorkManager.getInstance(application).enqueue(NotificationWorker.workRequest())
-    }
-
-    override fun onDestroy() {
-        disposables.forEach { it.dispose() }
-        super.onDestroy()
     }
 }

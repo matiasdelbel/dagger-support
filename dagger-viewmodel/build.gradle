@@ -8,10 +8,10 @@ publish {
     repoName = 'maven'
 
     groupId = 'com.delbel.dagger'
-    artifactId = 'dagger-rx'
+    artifactId = 'dagger-viewmodel'
     publishVersion = '0.0.3'
 
-    desc = 'Android library that integrate RxJava and Dagger'
+    desc = 'Android library that integrate JetPack View Model and Dagger'
     website = 'https://github.com/matiasdelbel/dagger-support'
 }
 
@@ -19,6 +19,6 @@ dependencies {
     implementation core.dagger
     kapt core.daggerCompiler
 
-    implementation rx.rxJava
-    implementation rx.rxAndroid
+    implementation viewModel.viewModel
+    implementation viewModel.lifecycleExt
 }
