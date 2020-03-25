@@ -20,10 +20,12 @@ ext {
     ]
 
     core = [
-            stdlibJdk7    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61",
+            stdlibJdk7     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61",
 
-            dagger        : "com.google.dagger:dagger:2.25.2",
-            daggerCompiler: "com.google.dagger:dagger-compiler:2.25.2"
+            dagger         : "com.google.dagger:dagger:2.25.2",
+            daggerSupport  : "com.google.dagger:dagger-android-support:2.25.2",
+            daggerProcessor: "com.google.dagger:dagger-android-processor:2.25.2",
+            daggerCompiler : "com.google.dagger:dagger-compiler:2.25.2"
     ]
 
     rx = [
@@ -33,6 +35,11 @@ ext {
 
     work = [
             runtime: "androidx.work:work-runtime-ktx:2.3.4"
+    ]
+
+    viewModel = [
+            viewModel   : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0",
+            lifecycleExt: "androidx.lifecycle:lifecycle-extensions:2.0.0"
     ]
 
     presentation = [

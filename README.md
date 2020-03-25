@@ -16,9 +16,42 @@ Then, you can annotate the scheduler that you want to inject
 class Repository @Inject constructor(@ComputationScheduler private val scheduler: Scheduler)
 ```
 
-### Dependency
+## View Model
+Dagger module that provides a view model factory (`ViewModelFactory`).
+You can inject view models with the `ViewModelKey` annotation.
+
+### How to use it?
+Bind the created view model
 ```
- implementation "com.delbel.dagger:dagger-rx:0.0.3"
+@Module
+internal interface ScreenModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    fun bindListingViewModel(viewModel: MainViewModel): ViewModel
+}
+```
+
+Add the modules in your component:
+```
+@Component(modules = [DaggerViewModelFactoryModule::class, ScreenModule::class])
+interface MainComponent
+```
+
+Inject the view model into your view:
+```
+class MainScreen : AppCompatActivity() {
+
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: MainViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
+
+        viewModel = viewModelFactory.create(this, MainViewModel::class.java)
+    }
 ```
 
 ## Work
@@ -84,9 +117,4 @@ class MainApplication : Application() {
 
     private fun injectDependencies() = mainComponent.inject(application = this)
 }
-```
-
-### Dependency
-```
- implementation "com.delbel.dagger:dagger-work:0.0.2"
 ```
