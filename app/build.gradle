@@ -7,9 +7,12 @@ android.defaultConfig.applicationId = "com.delbel.dagger.testapp"
 dependencies {
     implementation project(':dagger-rx')
     implementation project(':dagger-work')
+    implementation project(':dagger-viewmodel')
 
     implementation core.dagger
+    implementation core.daggerSupport
     kapt core.daggerCompiler
+    kapt core.daggerProcessor
 
     implementation rx.rxJava
 

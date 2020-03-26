@@ -12,7 +12,7 @@ publish {
     publishVersion = '0.0.2'
 
     desc = 'Android library that integrate JetPack Worker and Dagger'
-    website = 'https://github.com/matiasdelbel/dagger'
+    website = 'https://github.com/matiasdelbel/dagger-support'
 }
 
 dependencies {
