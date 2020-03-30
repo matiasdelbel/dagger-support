@@ -3,7 +3,7 @@ package com.delbel.dagger.testapp.di
 import android.app.Application
 import com.delbel.dagger.rx.di.DaggerRxModule
 import com.delbel.dagger.testapp.MainApplication
-import com.delbel.dagger.viewmodel.di.DaggerViewModelFactoryModule
+import com.delbel.dagger.viewmodel.general.di.ViewModelFactoryModule
 import com.delbel.dagger.work.di.DaggerWorkerModule
 import dagger.BindsInstance
 import dagger.Component
@@ -15,7 +15,7 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         DaggerRxModule::class,
         DaggerWorkerModule::class,
-        DaggerViewModelFactoryModule::class,
+        ViewModelFactoryModule::class,
         NotificationModule::class,
         WorkerBindingModule::class,
         ScreenModule::class

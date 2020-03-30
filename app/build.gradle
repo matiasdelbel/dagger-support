@@ -2,12 +2,19 @@ apply plugin: 'com.android.application'
 
 apply from: "$rootDir/plugin/module-kotlin-android.gradle"
 
+apply plugin: 'kotlin-android-extensions'
+
 android.defaultConfig.applicationId = "com.delbel.dagger.testapp"
 
 dependencies {
     implementation project(':dagger-rx')
     implementation project(':dagger-work')
     implementation project(':dagger-viewmodel')
+
+    implementation app.reactiveStreams
+    implementation app.assistedInjection
+
+    kapt app.assistedInjectionCompiler
 
     implementation core.dagger
     implementation core.daggerSupport
@@ -17,6 +24,8 @@ dependencies {
     implementation rx.rxJava
 
     implementation work.runtime
+
+    implementation viewModel.fragment
 
     implementation presentation.appcompat
 }
