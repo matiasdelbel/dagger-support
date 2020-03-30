@@ -1,4 +1,4 @@
-package com.delbel.dagger.viewmodel
+package com.delbel.dagger.viewmodel.general
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -9,7 +9,7 @@ publish {
 
     groupId = 'com.delbel.dagger'
     artifactId = 'dagger-viewmodel'
-    publishVersion = '0.0.3'
+    publishVersion = '0.0.4'
 
     desc = 'Android library that integrate JetPack View Model and Dagger'
     website = 'https://github.com/matiasdelbel/dagger-support'
@@ -19,6 +19,7 @@ dependencies {
     implementation core.dagger
     kapt core.daggerCompiler
 
+    implementation viewModel.fragment
     implementation viewModel.viewModel
     implementation viewModel.lifecycleExt
 }
