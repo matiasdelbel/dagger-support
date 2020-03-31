@@ -3,6 +3,8 @@
 
     <string name="app_calculate_length">Calculate length</string>
 
+    <string name="navigate_to_detail">Navigate to detail</string>
+
     <string name="app_show_notification">Show notification from worker</string>
     <string name="app_notify_channel_name">Dagger Test App notifications</string>
     <string name="app_notify_title">Ey! A notification for you!</string>

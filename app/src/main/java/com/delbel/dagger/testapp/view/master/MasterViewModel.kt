@@ -1,4 +1,4 @@
-package com.delbel.dagger.testapp.view
+package com.delbel.dagger.testapp.view.master
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-internal class MainViewModel @Inject constructor(
+internal class MasterViewModel @Inject constructor(
     private val repository: TextRepository,
     @MainScheduler private val mainScheduler: Scheduler
 ) : ViewModel() {
