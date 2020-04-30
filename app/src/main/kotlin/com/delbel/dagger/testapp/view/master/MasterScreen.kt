@@ -11,24 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
 import com.delbel.dagger.testapp.R
+import com.delbel.dagger.testapp.databinding.ScreenMasterBinding
 import com.delbel.dagger.testapp.view.MainScreen
-import com.delbel.dagger.testapp.view.detail.DetailScreen
 import com.delbel.dagger.testapp.worker.NotificationWorker
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.screen_master.*
 import javax.inject.Inject
 
 internal class MasterScreen : Fragment(R.layout.screen_master) {
 
-    companion object {
-
-        fun replace(@IdRes containerId: Int, fragmentManager: FragmentManager) {
-            fragmentManager
-                .beginTransaction()
-                .replace(containerId, MasterScreen(), MasterScreen::class.java.name)
-                .commit()
-        }
-    }
+    private lateinit var screenBinding: ScreenMasterBinding
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -41,24 +32,35 @@ internal class MasterScreen : Fragment(R.layout.screen_master) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        screenBinding = ScreenMasterBinding.bind(requireView())
 
         viewModel.textLength.observe(viewLifecycleOwner, Observer { text ->
             Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
-            calculateLength.isEnabled = true
+            screenBinding.calculateLength.isEnabled = true
         })
 
 
-        calculateLength.setOnClickListener {
-            calculateLength.isEnabled = false
-            viewModel.onInputChanges(input.text.toString())
+        screenBinding.calculateLength.setOnClickListener {
+            screenBinding.calculateLength.isEnabled = false
+            viewModel.onInputChanges(screenBinding.input.text.toString())
         }
 
-        throwNotification.setOnClickListener {
+        screenBinding.throwNotification.setOnClickListener {
             WorkManager.getInstance(requireContext()).enqueue(NotificationWorker.workRequest())
         }
 
-        navigateAndCalculateLength.setOnClickListener {
-            (requireActivity() as MainScreen).navigateWith(input = input.text.toString())
+        screenBinding.navigateAndCalculateLength.setOnClickListener {
+            (requireActivity() as MainScreen).navigateWith(input = screenBinding.input.text.toString())
+        }
+    }
+
+    companion object {
+
+        fun replace(@IdRes containerId: Int, fragmentManager: FragmentManager) {
+            fragmentManager
+                .beginTransaction()
+                .replace(containerId, MasterScreen(), MasterScreen::class.java.name)
+                .commit()
         }
     }
 }

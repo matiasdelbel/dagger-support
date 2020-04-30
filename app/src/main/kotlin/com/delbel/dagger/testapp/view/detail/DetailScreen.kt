@@ -9,23 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.delbel.dagger.testapp.R
+import com.delbel.dagger.testapp.databinding.ScreenDetailBinding
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.screen_detail.*
 import javax.inject.Inject
 
 class DetailScreen : Fragment(R.layout.screen_detail) {
 
-    companion object {
-
-        fun replace(@IdRes containerId: Int, fragmentManager: FragmentManager, input: String) {
-            val fragment = DetailScreen().apply { arguments = bundleOf("parameter" to input) }
-
-            fragmentManager
-                .beginTransaction()
-                .replace(containerId, fragment, DetailScreen::class.java.name)
-                .commit()
-        }
-    }
+    private lateinit var screenBinding: ScreenDetailBinding
 
     @Inject
     internal lateinit var factory: DetailViewModel.Factory
@@ -38,7 +28,20 @@ class DetailScreen : Fragment(R.layout.screen_detail) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        screenBinding = ScreenDetailBinding.bind(requireView())
 
-        viewModel.listing.observe(viewLifecycleOwner, Observer { result.text = it })
+        viewModel.listing.observe(viewLifecycleOwner, Observer { screenBinding.result.text = it })
+    }
+
+    companion object {
+
+        fun replace(@IdRes containerId: Int, fragmentManager: FragmentManager, input: String) {
+            val fragment = DetailScreen().apply { arguments = bundleOf("parameter" to input) }
+
+            fragmentManager
+                .beginTransaction()
+                .replace(containerId, fragment, DetailScreen::class.java.name)
+                .commit()
+        }
     }
 }
