@@ -1,6 +1,5 @@
-package com.delbel.dagger.work.ext
+package android.app
 
-import android.app.Application
 import androidx.work.Configuration
 import androidx.work.WorkManager
 import androidx.work.WorkerFactory

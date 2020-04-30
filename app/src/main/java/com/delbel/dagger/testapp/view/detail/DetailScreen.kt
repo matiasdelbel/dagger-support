@@ -1,6 +1,7 @@
 package com.delbel.dagger.testapp.view.detail
 
 import android.content.Context
+import android.fragment.app.viewModels
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.core.os.bundleOf
@@ -8,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.delbel.dagger.testapp.R
-import com.delbel.dagger.viewmodel.savedstate.ext.viewModels
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.screen_detail.*
 import javax.inject.Inject

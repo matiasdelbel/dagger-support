@@ -1,9 +1,9 @@
 package com.delbel.dagger.testapp
 
 import android.app.Application
+import android.app.initializeWorkManager
 import androidx.work.WorkerFactory
 import com.delbel.dagger.testapp.di.DaggerMainComponent
-import com.delbel.dagger.work.ext.initializeWorkManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
